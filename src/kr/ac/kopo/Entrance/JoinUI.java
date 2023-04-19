@@ -2,15 +2,15 @@ package kr.ac.kopo.Entrance;
 
 import java.util.List;
 
-import kr.ac.kopo.service.LibService;
+import kr.ac.kopo.service.MemberService;
 import kr.ac.kopo.vo.MemberVO;
 
 public class JoinUI extends BaseUI {
 
-	private LibService memberDao;
+	private MemberService memberDao;
 
 	public JoinUI() {
-		memberDao = new LibService();
+		memberDao = new MemberService();
 	}
 
 	@Override
@@ -29,7 +29,7 @@ public class JoinUI extends BaseUI {
 			System.out.println("이미 존재하는 ID 입니다");
 			this.enter();
 		}
-		String password = scanStr("비밀번호를 입력하세요 (최대 8자리): ");
+		String password = scanStr("비밀번호를 입력하세요 (최대 16자리): ");
 		String name = scanStr("이름을 입력하세요 : ");
 		String phoneNo = scanStr("전화번호를 입력하세요 : ");
 		String birthday = scanStr("생년월일을 입력하세요 (8자리): ");
@@ -45,7 +45,9 @@ public class JoinUI extends BaseUI {
 		memberDao.insertMember(member);
 
 		System.out.println("회원가입이 완료되었습니다");
-		System.exit(0);
+		
+		LibEntrance le = new LibEntrance();
+		le.enter();
 		
 		
 

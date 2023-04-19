@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
+import kr.ac.kopo.IDFactory;
 import kr.ac.kopo.util.ConnectionFactory;
 import kr.ac.kopo.vo.MemberVO;
 
@@ -74,5 +75,46 @@ public class MemberDAO {
 		return memberList;
 		
 	}
+	
+	public List<MemberVO> myInfo(){
+		
+		List<MemberVO> memberList = new ArrayList<>();
+		
+		StringBuilder sql = new StringBuilder();
+		sql.append("select no, id, password, name, phone_no, birthday from members");
+		sql.append(" where id = ? ");
+		
+		try (
+				Connection conn = new ConnectionFactory().getConnection();
+				PreparedStatement pstmt = conn.prepareStatement(sql.toString());	
+				){
+			
+			pstmt.setString(1, IDFactory.getID());
+			
+			System.out.println(IDFactory.getID()); //static 아이디 확인용
+			
+			ResultSet rs = pstmt.executeQuery();
+			while(rs.next()) {
+				int no = rs.getInt("no");
+				String id = rs.getString("id");
+				String password = rs.getString("password");
+				String name = rs.getString("name");
+				String phoneNo = rs.getString("phone_no");
+				String birthday = rs.getString("birthday");
+				
+				MemberVO member = new MemberVO(no, id, password, name, phoneNo, birthday);
+				
+				memberList.add(member);
+				
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return memberList;
+		
+	}
+	
+	
 
 }

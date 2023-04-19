@@ -5,12 +5,15 @@ import java.util.List;
 import kr.ac.kopo.dao.MemberDAO;
 import kr.ac.kopo.vo.MemberVO;
 
-public class LibService {
+public class MemberService {
 	
 	private MemberDAO memberDao;
+
 	
-	public LibService() {
+	public MemberService() {
 		memberDao = new MemberDAO();
+		
+		
 	}
 	
 	public void insertMember(MemberVO member) {
@@ -23,6 +26,12 @@ public class LibService {
 		List<MemberVO> memberList = memberDao.allMember();
 		return memberList;
 	}
+	
+	public List<MemberVO> myInformation(){
+		List<MemberVO> memberList = memberDao.myInfo();
+		return memberList;
+	}
+	
 	
 
 }
