@@ -18,8 +18,50 @@ public class BillyeoVO {
 	public BillyeoVO() {
 		
 	}
+	
+	
 
 	
+
+
+
+
+
+	public BillyeoVO(int bookNo, String bookTitle, String bookWriter, String bookPublisher) {
+		super();
+		this.bookNo = bookNo;
+		this.bookTitle = bookTitle;
+		this.bookWriter = bookWriter;
+		this.bookPublisher = bookPublisher;
+	}
+
+
+
+
+
+
+
+
+
+	public BillyeoVO(int no, String id, String name, String phoneNo, String birthday, int bookNo, String bookTitle,
+			String bookWriter, String bookPublisher, String rntDate, String rtDate) {
+		super();
+		this.no = no;
+		this.id = id;
+		this.name = name;
+		this.phoneNo = phoneNo;
+		this.birthday = birthday;
+		this.bookNo = bookNo;
+		this.bookTitle = bookTitle;
+		this.bookWriter = bookWriter;
+		this.bookPublisher = bookPublisher;
+		this.rntDate = rntDate;
+		this.rtDate = rtDate;
+	}
+
+
+
+
 
 	public BillyeoVO(int no, String id, String password, String name, String phoneNo, String birthday, int bookNo,
 			String bookTitle, String bookWriter, String bookPublisher, String rntDate, String rtDate) {
@@ -138,6 +180,8 @@ public class BillyeoVO {
 	public void setRntDate(String rntDate) {
 		this.rntDate = rntDate;
 	}
+	
+	
 
 
 

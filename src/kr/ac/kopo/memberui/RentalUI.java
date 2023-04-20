@@ -3,7 +3,7 @@ package kr.ac.kopo.memberui;
 import java.util.Scanner;
 
 import kr.ac.kopo.Entrance.BaseUI;
-import kr.ac.kopo.rental.SearchAllRntBooks;
+import kr.ac.kopo.Entrance.ILibEntrance;
 import kr.ac.kopo.rental.SearchOne;
 
 public class RentalUI extends BaseUI{
@@ -12,8 +12,7 @@ public class RentalUI extends BaseUI{
 		System.out.println("********** 도서 대출 메뉴 **********");
 		System.out.println("1. 도서 검색");
 		System.out.println("2. 도서 대출");
-		System.out.println("3. 대출 도서 목록 출력");
-		System.out.println("4. 회원 메뉴로 이동");
+		System.out.println("3. 회원 메뉴로 이동");
 		Scanner sc = new Scanner(System.in);
 		System.out.print("원하시는 항목을 입력하세요 : ");
 		int type = sc.nextInt();
@@ -24,25 +23,26 @@ public class RentalUI extends BaseUI{
 	@Override
 	public void enter() throws Exception {
 		while(true) {
-			
+			ILibEntrance door = null;
 			int type = rentalMenu();
 			switch(type) {
 			case 1 : 
-				SearchOne so = new SearchOne();
-				so.enter();
+				door = new SearchOne();
+				
 				break;
 			case 2 :
-				DaeyeoUI dy = new DaeyeoUI();
-				dy.enter();
+				door = new DaeyeoUI();
+				
 				break;
 			case 3 :
-				SearchAllRntBooks sarb = new SearchAllRntBooks();
-				sarb.enter();
+				door = new MyPageUI();
+				
 				break;
-			case 4 :
-				MyPageUI mpu = new MyPageUI();
-				mpu.enter();
-				break;
+			}
+			if(door != null) {
+				door.enter();
+			} else {
+				System.out.println("잘못입력하셨습니다");
 			}
 		}
 		

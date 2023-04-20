@@ -26,6 +26,11 @@ public class RentalService {
 		rentDao.returnBook(bNo);;
 	}
 	
+	public List<Integer> retCheck() {
+		List<Integer> rch = rentDao.rentalCheck();
+		return rch;
+	}
+	
 	
 
 }

@@ -37,7 +37,7 @@ public class DaeyeoUI extends BaseUI{
 			
 			rentDao.rentBook(rntBook);
 			
-			System.out.println("대여완료");
+			System.out.println(rntBook + "대여완료");
 		} else {
 			System.out.println("해당 책은 대여중입니다");
 		}

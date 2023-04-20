@@ -113,5 +113,64 @@ public class BookDAO {
 		return book;
 		
 	}
+	
+	public List<BookVO> selectByAll(String allofbook) {
+		List<BookVO> book = new ArrayList<>();
+		int bookh = 0;
+		StringBuilder sql = new StringBuilder();
+		sql.append("select instr((b_no || b_title || b_writer || b_publisher), ?)as bookh");
+		sql.append(" , b_no, b_title, b_writer, b_publisher");
+		sql.append(" from books");
+		sql.append(" where instr((b_no || b_title || b_writer || b_publisher), ?) != 0");
+			
+		try (
+			Connection conn = new ConnectionFactory().getConnection();
+			PreparedStatement pstmt = conn.prepareStatement(sql.toString());
+				){
+			pstmt.setString(1, allofbook);
+			pstmt.setString(2, allofbook);
+			
+			
+			ResultSet rs = pstmt.executeQuery();
+			while(rs.next()) {
+				int bookNo = rs.getInt("b_no");
+				String bookTitle = rs.getString("b_title");
+				String bookWriter = rs.getString("b_writer");
+				String bookPublisher = rs.getString("b_publisher");
+				
+				BookVO booklit = new BookVO(bookNo, bookTitle, bookWriter, bookPublisher);
+				book.add(booklit);
+			}
+			
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return book;
+	}
+	
+	public int selectByAllChck(String allofbook) {
+		int book = 0;
+		StringBuilder sql = new StringBuilder();
+		sql.append("select instr((b_no || b_title || b_writer || b_publisher), ?) as book");
+		sql.append(" from rental");
+		
+		
+		try (
+			Connection conn = new ConnectionFactory().getConnection();
+			PreparedStatement pstmt = conn.prepareStatement(sql.toString());
+				){
+			pstmt.setString(1, allofbook);
+			ResultSet rs = pstmt.executeQuery();
+			while(rs.next()) {
+				book = rs.getInt("book");		
+			}
+			
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return book;
+	}
 
 }

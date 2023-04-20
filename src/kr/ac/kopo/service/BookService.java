@@ -33,5 +33,15 @@ public class BookService {
 		return book;
 	}
 	
+	public List<BookVO> selectByAll(String allofBook) {
+		List<BookVO> book = bookDao.selectByAll(allofBook);
+		return book;
+	}
+	
+	public int selectByAllC(String allofBook) {
+		int book = bookDao.selectByAllChck(allofBook);
+		return book;
+	}
+	
 
 }

@@ -17,5 +17,15 @@ public class BillyeoService {
 		List<BillyeoVO> billyeoList = billyeoDao.billinsaram();
 		return billyeoList;
 	}
+	
+	public List<BillyeoVO> billinAll(){
+		List<BillyeoVO> billyeoList = billyeoDao.billinsaramAll();
+		return billyeoList;
+	}
+	
+	public int billi(String allofBook) {
+		int billin = billyeoDao.billinBook(allofBook);
+		return billin;
+	}
 
 }

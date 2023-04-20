@@ -11,6 +11,8 @@ public class BookVO {
 		
 	}
 
+
+
 	public BookVO(int bookNO, String bookTitle, String bookWriter, String bookPublisher) {
 		super();
 		this.bookNO = bookNO;

@@ -4,7 +4,10 @@ import java.util.Scanner;
 
 import kr.ac.kopo.IDFactory;
 import kr.ac.kopo.Entrance.BaseUI;
+import kr.ac.kopo.Entrance.ExitUI;
+import kr.ac.kopo.Entrance.ILibEntrance;
 import kr.ac.kopo.Entrance.LibEntrance;
+import kr.ac.kopo.rental.SearchAllRntBooks;
 
 public class MyPageUI extends BaseUI{
 	
@@ -13,8 +16,9 @@ public class MyPageUI extends BaseUI{
 		System.out.println("1. 도서대출");
 		System.out.println("2. 도서반납");
 		System.out.println("3. 마이페이지");
-		System.out.println("4. 로그아웃");
-		System.out.println("5. 종료");
+		System.out.println("4. 회원탈퇴");		
+		System.out.println("5. 로그아웃");
+		System.out.println("6. 종료");
 		System.out.println("===================================");
 		System.out.print("원하는 항목을 선택하세요 : ");
 		Scanner sc = new Scanner(System.in);
@@ -26,31 +30,43 @@ public class MyPageUI extends BaseUI{
 	@Override
 	public void enter() throws Exception{
 		int act = menu();
+		ILibEntrance door = null;
 		switch(act) {
 		case 1 :
-			RentalUI rt = new RentalUI();
-			rt.enter();
+			door = new RentalUI();
+			
 			break;
 		case 2 :
-			ReturnUI rtn = new ReturnUI();
-			rtn.enter();
-			System.out.println("도서반납");
+			door = new ReturnUI();
+			
+			
 			break;
 		case 3 :
-			System.out.println("마이페이지");
+			door = new SearchAllRntBooks();
 			break;	
 		case 4 :
+			door = new TalUI();
+			
+			
+			break;	
+		case 5 :
 			IDFactory idf = new IDFactory();
 			idf.enitialID();
 			idf.enitialBNO();
-			LibEntrance le = new LibEntrance();
-			le.enter();
+			door = new LibEntrance();
+			
 			break;	
-		case 5 :
-			System.out.println("도서 관리 프로그램을 종료합니다");
-			System.exit(0);
+		case 6 :
+			door = new ExitUI();
+			break;
 			
 		}
+		if(door != null) {
+			door.enter();
+		} else {
+			System.out.println("잘못입력하셨습니다");
+		}
+		
 	}
 
 }

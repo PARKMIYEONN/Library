@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import kr.ac.kopo.IDFactory;
+import kr.ac.kopo.Entrance.LibEntrance;
 import kr.ac.kopo.util.ConnectionFactory;
 import kr.ac.kopo.vo.MemberVO;
 
@@ -91,8 +92,6 @@ public class MemberDAO {
 			
 			pstmt.setString(1, IDFactory.getID());
 			
-			System.out.println(IDFactory.getID()); //static 아이디 확인용
-			
 			ResultSet rs = pstmt.executeQuery();
 			while(rs.next()) {
 				int no = rs.getInt("no");
@@ -113,6 +112,56 @@ public class MemberDAO {
 		}
 		return memberList;
 		
+	}
+	
+	public void talMember(String password) {
+		StringBuilder sql = new StringBuilder();
+		sql.append("delete from members where id = ?");
+		
+		try (
+			Connection conn = new ConnectionFactory().getConnection();
+			PreparedStatement pstmt = conn.prepareStatement(sql.toString());
+				){
+			pstmt.setString(1, IDFactory.getID());
+			pstmt.executeUpdate();
+			
+			System.out.println("탈퇴가 완료되었습니다");
+			
+			IDFactory idf = new IDFactory();
+			idf.enitialID();
+			idf.enitialBNO();
+			LibEntrance le = new LibEntrance();
+			le.enter();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public List<String> passwdCheck(String password){
+		
+		List<String> passwd = new ArrayList<>();
+		StringBuilder sql = new StringBuilder();
+		sql.append("select password from members where id = ? and password = ?");
+		
+		try (
+			Connection conn = new ConnectionFactory().getConnection();
+			PreparedStatement pstmt = conn.prepareStatement(sql.toString());
+				){
+			
+			pstmt.setString(1, IDFactory.getID());
+			pstmt.setString(2, password);
+			
+			ResultSet rs = pstmt.executeQuery();
+			while(rs.next()) {
+				String pswd = rs.getString("password");
+				passwd.add(pswd);
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();;
+		}
+		return passwd;
 	}
 	
 	

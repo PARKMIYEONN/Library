@@ -32,6 +32,15 @@ public class MemberService {
 		return memberList;
 	}
 	
+	public void talmem(String id) {
+		memberDao.talMember(id);
+	}
+	
+	public List<String> pwdCheck(String password){
+		List<String> pwd = memberDao.passwdCheck(password);
+		return pwd;
+	}
+	
 	
 
 }

@@ -23,15 +23,21 @@ public class LibEntrance extends BaseUI{
 			switch(log) {
 			case 1 : 
 				door = new LogInUI();
-				door.enter();		
+						
 				break;
 			case 2 :
 				door = new JoinUI();
-				door.enter();
+				
 				break;
 			case 3 :
-				System.out.println("**** 도서 관리 프로그램을 종료합니다 ****");
-				System.exit(0);
+				door = new ExitUI();
+				
+				break;
+			}
+			if(door != null) {
+				door.enter();
+			} else {
+				System.out.println("잘못입력하셨습니다");
 			}
 		}
 	}

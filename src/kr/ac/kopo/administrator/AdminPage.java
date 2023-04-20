@@ -4,10 +4,12 @@ import java.util.Scanner;
 
 import kr.ac.kopo.IDFactory;
 import kr.ac.kopo.Entrance.BaseUI;
+import kr.ac.kopo.Entrance.ILibEntrance;
 import kr.ac.kopo.Entrance.LibEntrance;
 import kr.ac.kopo.books.AddBooks;
 import kr.ac.kopo.books.DelBooks;
 import kr.ac.kopo.books.SearchAllUI;
+import kr.ac.kopo.rental.AllRentalSaram;
 
 public class AdminPage extends BaseUI{
 	
@@ -32,26 +34,36 @@ public class AdminPage extends BaseUI{
 		while(true) {
 			
 			int type = adminMenu();
+			ILibEntrance door = null;
 			switch(type) {
 			case 1 :
-				AddBooks ab = new AddBooks();
-				ab.enter();
+				door = new AddBooks();
+				
 				break;
 			case 2 :
-				DelBooks dbs = new DelBooks();
-				dbs.enter();
+				door = new DelBooks();
+				
 				break;
 			case 3 :
-				SearchAllUI sa = new SearchAllUI();
-				sa.enter();
+				door = new SearchAllUI();
+				
 				break;
 			case 4 :
+				door = new AllRentalSaram();
+				
+				break;
+			case 5 :
 				IDFactory idf = new IDFactory();
 				idf.enitialID();
 				idf.enitialBNO();
-				LibEntrance le = new LibEntrance();
-				le.enter();
+				door = new LibEntrance();
+				
 				break;
+			}
+			if(door != null) {
+				door.enter();
+			} else {
+				System.out.println("잘못입력하셨습니다");
 			}
 		}
 		

@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
+import kr.ac.kopo.IDFactory;
 import kr.ac.kopo.util.ConnectionFactory;
 import kr.ac.kopo.vo.RentalVO;
 
@@ -79,6 +80,30 @@ public class RentalDAO {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+	
+	public List<Integer> rentalCheck(){
+		
+		List<Integer> rb = new ArrayList<>();
+		StringBuilder sql = new StringBuilder();
+		sql.append("select b_no from rental where id = ?");
+		try (
+			Connection conn = new ConnectionFactory().getConnection();
+			PreparedStatement pstmt = conn.prepareStatement(sql.toString());
+				){
+			
+			pstmt.setString(1, IDFactory.getID());
+			
+			ResultSet rs = pstmt.executeQuery();
+			while(rs.next()) {
+				int rbook = rs.getInt("b_no");
+				rb.add(rbook);
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return rb;
 	}
 
 
