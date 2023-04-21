@@ -4,15 +4,18 @@ import java.util.Scanner;
 
 import kr.ac.kopo.Entrance.BaseUI;
 import kr.ac.kopo.Entrance.ILibEntrance;
+import kr.ac.kopo.books.SearchAllBookUI;
 import kr.ac.kopo.rental.SearchOne;
 
 public class RentalUI extends BaseUI{
 
 	private int rentalMenu() {
 		System.out.println("********** 도서 대출 메뉴 **********");
-		System.out.println("1. 도서 검색");
-		System.out.println("2. 도서 대출");
-		System.out.println("3. 회원 메뉴로 이동");
+		
+		System.out.println("1. 전체 도서 목록");
+		System.out.println("2. 도서 검색");
+		System.out.println("3. 도서 대출");
+		System.out.println("4. 회원 메뉴로 이동");
 		Scanner sc = new Scanner(System.in);
 		System.out.print("원하시는 항목을 입력하세요 : ");
 		int type = sc.nextInt();
@@ -27,14 +30,18 @@ public class RentalUI extends BaseUI{
 			int type = rentalMenu();
 			switch(type) {
 			case 1 : 
+				door = new SearchAllBookUI();
+				
+				break;
+			case 2 : 
 				door = new SearchOne();
 				
 				break;
-			case 2 :
+			case 3 :
 				door = new DaeyeoUI();
 				
 				break;
-			case 3 :
+			case 4 :
 				door = new MyPageUI();
 				
 				break;

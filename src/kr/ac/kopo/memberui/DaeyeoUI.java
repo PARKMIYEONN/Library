@@ -4,16 +4,24 @@ import java.util.List;
 
 import kr.ac.kopo.IDFactory;
 import kr.ac.kopo.Entrance.BaseUI;
+import kr.ac.kopo.service.BillyeoService;
+import kr.ac.kopo.service.BookService;
 import kr.ac.kopo.service.RentalService;
+import kr.ac.kopo.vo.BillyeoVO;
+import kr.ac.kopo.vo.BookVO;
 import kr.ac.kopo.vo.RentalVO;
 
 public class DaeyeoUI extends BaseUI{
 	
 	private RentalService rentDao;
+	private BookService bkService;
+	private BillyeoService bilService;
    
     
 	public DaeyeoUI() {
 		rentDao = new RentalService();
+		bkService = new BookService();
+		bilService = new BillyeoService();
 		
 	}
 
@@ -23,6 +31,8 @@ public class DaeyeoUI extends BaseUI{
 		int bookNo = scanInt("대여할 책의 고유번호를 입력하세요 : ");
 		
 		List<Integer> bNolist = rentDao.rentBNO(bookNo);
+		List<BookVO> book = bkService.selectByAll(Integer.toString(bookNo));
+		List<BillyeoVO> billin = null;
 		
 		if(bNolist.size() == 0) {
 			
@@ -36,15 +46,19 @@ public class DaeyeoUI extends BaseUI{
 			
 			
 			rentDao.rentBook(rntBook);
+			for(BookVO booklist : book) {
+				billin = bilService.billi(booklist.getBookNO());
+				System.out.print("\"" + billin.get(0).getBookTitle() + "\"" + "  ");
+			}
 			
-			System.out.println(rntBook + "대여완료");
+			System.out.println("대출완료");
 		} else {
-			System.out.println("해당 책은 대여중입니다");
+			System.out.println("해당 책은 대출중입니다");
 		}
 			
 		
-		MyPageUI mpu = new MyPageUI();
-		mpu.enter();
+		RentalUI rtu = new RentalUI();
+		rtu.enter();
 		
 	}
 	

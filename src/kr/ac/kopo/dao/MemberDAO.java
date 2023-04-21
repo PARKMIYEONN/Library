@@ -157,13 +157,43 @@ public class MemberDAO {
 				String pswd = rs.getString("password");
 				passwd.add(pswd);
 			}
-			
+
 		} catch (Exception e) {
-			e.printStackTrace();;
+			e.printStackTrace();
+			;
 		}
 		return passwd;
 	}
-	
-	
+
+	public List<MemberVO> allMembers() {
+
+		List<MemberVO> memberList = new ArrayList<>();
+
+		StringBuilder sql = new StringBuilder();
+		sql.append("select no, id, name, phone_no, birthday from members");
+
+		try (Connection conn = new ConnectionFactory().getConnection();
+				PreparedStatement pstmt = conn.prepareStatement(sql.toString());) {
+
+			ResultSet rs = pstmt.executeQuery();
+			while (rs.next()) {
+				int no = rs.getInt("no");
+				String id = rs.getString("id");
+				String name = rs.getString("name");
+				String phoneNo = rs.getString("phone_no");
+				String birthday = rs.getString("birthday");
+
+				MemberVO member = new MemberVO(no, id, name, phoneNo, birthday);
+
+				memberList.add(member);
+
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return memberList;
+
+	}
 
 }

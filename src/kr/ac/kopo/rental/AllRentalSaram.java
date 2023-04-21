@@ -18,14 +18,18 @@ public class AllRentalSaram extends BaseUI{
 	public void enter() throws Exception {
 		List<BillyeoVO> bilList = blyService.billinAll();
 		
-		System.out.println("================================================================================");
+		System.out.println("=====================================================================================================");
+
 		System.out.println("회원번호\t아이디\t이름\t전화번호\t생일\t책번호\t책제목\t글쓴이\t출판사\t대여일\t반납일");
-		System.out.println("================================================================================");
+		System.out.println("=====================================================================================================");
+
 		
 		if(bilList == null || bilList.size() == 0) {
-			System.out.println("========================================");
-			System.out.println("보유하고 있는 책이 없습니다");
-			System.out.println("========================================");
+			System.out.println("=====================================================================================================");
+
+			System.out.println("책이 없습니다");
+			System.out.println("=====================================================================================================");
+
 		} else {
 			for(BillyeoVO bList : bilList) {
 				System.out.println(bList.getNo() + "\t" + bList.getId() + "\t" + bList.getName() + "\t" + bList.getPhoneNo() + "\t" + bList.getBirthday()

@@ -23,8 +23,13 @@ public class BillyeoService {
 		return billyeoList;
 	}
 	
-	public int billi(String allofBook) {
-		int billin = billyeoDao.billinBook(allofBook);
+	public List<BillyeoVO> billi(int allofBook) {
+		List<BillyeoVO> billin = billyeoDao.billinBook(allofBook);
+		return billin;
+	}
+	
+	public List<BillyeoVO> billiThing(){
+		List<BillyeoVO> billin = billyeoDao.billinThing();
 		return billin;
 	}
 

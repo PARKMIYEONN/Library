@@ -93,29 +93,65 @@ public class BillyeoDAO {
 		return billyeoList;
 	}
 	
-	public int billinBook(String allofBook){
-		int book = 0;
+	public List<BillyeoVO> billinBook(int allofBook){
+		List<BillyeoVO> billList = new ArrayList<>();
 		
 		StringBuilder sql = new StringBuilder();
-		sql.append("select instr((a.b_no||b_title||b_writer||b_publisher), ?)as book");
-		sql.append(" ,a.b_no, b_title, b_writer, b_Publisher");
+		sql.append("select a.b_no, b_title, b_writer, b_Publisher");
 		sql.append(" from rental a join members b on b.id = a.id join books c on c.b_no = a.b_no ");
+		sql.append(" where a.b_no = ?");
 		
 		try (
 				Connection conn = new ConnectionFactory().getConnection();
 				PreparedStatement pstmt = conn.prepareStatement(sql.toString());	
 				){
 			
-			pstmt.setString(1, allofBook);
+			pstmt.setInt(1, allofBook);
 			ResultSet rs = pstmt.executeQuery();
 			while(rs.next()) {
-				book = rs.getInt("book");
+				int bookNO = rs.getInt("b_no");
+				String bookTitle = rs.getString("b_title");
+				String bookWriter = rs.getString("b_writer");
+				String bookPublisher = rs.getString("b_publisher");
+				
+				BillyeoVO billyeo = new BillyeoVO(bookNO, bookTitle, bookWriter, bookPublisher);
+				billList.add(billyeo);
 			}
 			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return book;
+		return billList;
+	}
+	
+	public List<BillyeoVO> billinThing(){
+		List<BillyeoVO> billList = new ArrayList<>();
+		
+		StringBuilder sql = new StringBuilder();
+		sql.append("select a.b_no, b_title, b_writer, b_publisher");
+		sql.append(" from rental a join members b on b.id = a.id join books c on c.b_no = a.b_no ");
+		sql.append(" where a.id = ?");
+		
+		try (
+			Connection conn = new ConnectionFactory().getConnection();
+			PreparedStatement pstmt = conn.prepareStatement(sql.toString());
+				){
+			
+			pstmt.setString(1, IDFactory.getID());
+			ResultSet rs = pstmt.executeQuery();
+			while(rs.next()) {
+				int bookNO = rs.getInt("b_no");
+				String bookTitle = rs.getString("b_title");
+				String bookWriter = rs.getString("b_writer");
+				String bookPublisher = rs.getString("b_publisher");
+				
+				BillyeoVO billyeo = new BillyeoVO(bookNO, bookTitle, bookWriter, bookPublisher);
+				billList.add(billyeo);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return billList;
 	}
 	
 

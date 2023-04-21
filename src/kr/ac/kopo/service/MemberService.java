@@ -41,6 +41,11 @@ public class MemberService {
 		return pwd;
 	}
 	
+	public List<MemberVO> allmems(){
+		List<MemberVO> memberList = memberDao.allMembers();
+		return memberList;
+	}
+	
 	
 
 }

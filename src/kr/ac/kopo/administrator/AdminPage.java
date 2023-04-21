@@ -8,7 +8,8 @@ import kr.ac.kopo.Entrance.ILibEntrance;
 import kr.ac.kopo.Entrance.LibEntrance;
 import kr.ac.kopo.books.AddBooks;
 import kr.ac.kopo.books.DelBooks;
-import kr.ac.kopo.books.SearchAllUI;
+import kr.ac.kopo.books.SearchAllBookUI;
+import kr.ac.kopo.memberui.AllMemberUI;
 import kr.ac.kopo.rental.AllRentalSaram;
 
 public class AdminPage extends BaseUI{
@@ -18,10 +19,12 @@ public class AdminPage extends BaseUI{
 		System.out.println("1. 도서등록");
 		System.out.println("2. 도서삭제");
 		System.out.println("3. 도서 목록 출력");
-		System.out.println("4. 대출 현황 출력");
-		System.out.println("5. 로그아웃");
+		System.out.println("4. 회원 목록 출력");
+		System.out.println("5. 대출 현황 출력");
+		System.out.println("6. 로그아웃");
 		
-		System.out.println("====================================");
+		System.out.println("=====================================================================================================");
+
 		Scanner sc = new Scanner(System.in);
 		System.out.print("원하시는 항목을 입력하세요 : ");
 		int type = sc.nextInt();
@@ -45,14 +48,18 @@ public class AdminPage extends BaseUI{
 				
 				break;
 			case 3 :
-				door = new SearchAllUI();
+				door = new SearchAllBookUI();
 				
 				break;
 			case 4 :
-				door = new AllRentalSaram();
+				door = new AllMemberUI();
 				
 				break;
 			case 5 :
+				door = new AllRentalSaram();
+				
+				break;
+			case 6 :
 				IDFactory idf = new IDFactory();
 				idf.enitialID();
 				idf.enitialBNO();

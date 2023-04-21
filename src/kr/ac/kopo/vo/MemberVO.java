@@ -14,6 +14,21 @@ public class MemberVO {
 	}
 	
 	
+	
+	
+
+	public MemberVO(int no, String id, String name, String phoneNo, String birthDay) {
+		super();
+		this.no = no;
+		this.id = id;
+		this.name = name;
+		this.phoneNo = phoneNo;
+		this.birthDay = birthDay;
+	}
+
+
+
+
 
 	public MemberVO(int no, String id, String password, String name, String phoneNo, String birthDay) {
 		super();
