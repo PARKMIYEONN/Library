@@ -29,9 +29,17 @@ public class JoinUI extends BaseUI {
 			System.out.println("이미 존재하는 ID 입니다");
 			this.enter();
 		}
+		
 		String password = scanStr("비밀번호를 입력하세요 (최대 16자리): ");
+		String passwordCh = scanStr("비밀번호를 한번 더 입력하세요 : ");
+		while(!password.equals(passwordCh)) {
+			System.out.println("비밀번호가 틀립니다 다시 입력해주세요");
+			password = scanStr("비밀번호를 입력하세요 (최대 16자리): ");
+			passwordCh = scanStr("비밀번호를 한번 더 입력하세요 : ");
+			
+		}
 		String name = scanStr("이름을 입력하세요 : ");
-		String phoneNo = scanStr("전화번호를 입력하세요 : ");
+		String phoneNo = scanStr("전화번호를 입력하세요 (-포함 입력): ");
 		String birthday = scanStr("생년월일을 입력하세요 (8자리): ");
 		
 		MemberVO member = new MemberVO();

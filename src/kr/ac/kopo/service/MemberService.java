@@ -46,6 +46,19 @@ public class MemberService {
 		return memberList;
 	}
 	
+	public void pwSu(String password) {
+		memberDao.pwSujeong(password);
+	}
+	
+	public void nameSu(String name) {
+		memberDao.nameSujeong(name);
+	}
+	
+	public void phNoSu(String phoneNo) {
+		memberDao.phNSujeong(phoneNo);
+	}
+	
+
 	
 
 }

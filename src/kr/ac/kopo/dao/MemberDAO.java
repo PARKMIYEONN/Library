@@ -21,10 +21,10 @@ public class MemberDAO {
 
 
 
-	public void insertMember(MemberVO member) {
+	public void insertMember(MemberVO member) {		//회원 등록
 		
 		StringBuilder sql = new StringBuilder();
-		sql.append("insert into members(no, id, password, name, phone_no, birthday) values(seq_members_no.nextval,?,?,?,?,?) ");
+		sql.append("insert into members(no, id, password, name, phone_no, birthday) values(seq_members_no.nextval,?,?,?,?,to_date(?,'yyyymmdd')) ");
 		
 		try (
 			 Connection conn = new ConnectionFactory().getConnection();
@@ -43,12 +43,12 @@ public class MemberDAO {
 		}
 	}
 	
-	public List<MemberVO> allMember(){
+	public List<MemberVO> allMember(){			//모든 멤버의 모든 정보를 가진 리스트 리턴
 		
 		List<MemberVO> memberList = new ArrayList<>();
 		
 		StringBuilder sql = new StringBuilder();
-		sql.append("select no, id, password, name, phone_no, birthday from members");
+		sql.append("select no, id, password, name, phone_no, to_char(birthday,'yyyy-mm-dd')as birthday from members order by no");
 		
 		try (
 			 Connection conn = new ConnectionFactory().getConnection();
@@ -63,7 +63,6 @@ public class MemberDAO {
 				String name = rs.getString("name");
 				String phoneNo = rs.getString("phone_no");
 				String birthday = rs.getString("birthday");
-				
 				MemberVO member = new MemberVO(no, id, password, name, phoneNo, birthday);
 				
 				memberList.add(member);
@@ -77,12 +76,12 @@ public class MemberDAO {
 		
 	}
 	
-	public List<MemberVO> myInfo(){
+	public List<MemberVO> myInfo(){		//현재 로그인 중인 멤버의 회원 정보 리스트 리턴
 		
 		List<MemberVO> memberList = new ArrayList<>();
 		
 		StringBuilder sql = new StringBuilder();
-		sql.append("select no, id, password, name, phone_no, birthday from members");
+		sql.append("select no, id, password, name, phone_no, to_char(birthday,'yyyy-mm-dd')as birthday from members");
 		sql.append(" where id = ? ");
 		
 		try (
@@ -114,7 +113,7 @@ public class MemberDAO {
 		
 	}
 	
-	public void talMember(String password) {
+	public void talMember(String password) {			//입력받은 비밀번호가 현재 아이디의 비밀번호와 같으면 회원 탈퇴
 		StringBuilder sql = new StringBuilder();
 		sql.append("delete from members where id = ?");
 		
@@ -138,7 +137,8 @@ public class MemberDAO {
 		}
 	}
 	
-	public List<String> passwdCheck(String password){
+	public List<String> passwdCheck(String password){		//현재 로그인한 아이디와 패스워드가 같은 열 생성. 다르면 생성되지 않음
+															//나중에 리스트의 길이로 아이디와 패스워드 판단 가능
 		
 		List<String> passwd = new ArrayList<>();
 		StringBuilder sql = new StringBuilder();
@@ -165,12 +165,12 @@ public class MemberDAO {
 		return passwd;
 	}
 
-	public List<MemberVO> allMembers() {
+	public List<MemberVO> allMembers() {					//패스워드를 제외한 모든 회원의 정보 리스트 리턴
 
 		List<MemberVO> memberList = new ArrayList<>();
 
 		StringBuilder sql = new StringBuilder();
-		sql.append("select no, id, name, phone_no, birthday from members");
+		sql.append("select no, id, name, phone_no, to_char(birthday,'yyyy-mm-dd')as birthday from members order by no");
 
 		try (Connection conn = new ConnectionFactory().getConnection();
 				PreparedStatement pstmt = conn.prepareStatement(sql.toString());) {
@@ -182,7 +182,7 @@ public class MemberDAO {
 				String name = rs.getString("name");
 				String phoneNo = rs.getString("phone_no");
 				String birthday = rs.getString("birthday");
-
+				
 				MemberVO member = new MemberVO(no, id, name, phoneNo, birthday);
 
 				memberList.add(member);
@@ -194,6 +194,55 @@ public class MemberDAO {
 		}
 		return memberList;
 
+	}
+	
+	public void pwSujeong(String password) {
+		StringBuilder sql = new StringBuilder();
+		sql.append("update members set password = ? where id = ?");
+		try (
+			Connection conn = new ConnectionFactory().getConnection();
+			PreparedStatement pstmt = conn.prepareStatement(sql.toString());
+				){
+			pstmt.setString(1, password);
+			pstmt.setString(2, IDFactory.getID());
+			
+			pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+	}
+	
+	public void nameSujeong(String name) {
+		StringBuilder sql = new StringBuilder();
+		sql.append("update members set name = ? where id = ?");
+		try (
+				Connection conn = new ConnectionFactory().getConnection();
+				PreparedStatement pstmt = conn.prepareStatement(sql.toString());
+					){
+				pstmt.setString(1, name);
+				pstmt.setString(2, IDFactory.getID());
+				
+				pstmt.executeUpdate();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+	}
+	
+	public void phNSujeong(String phoneNo) {
+		StringBuilder sql = new StringBuilder();
+		sql.append("update members set phone_no = ? where id = ?");
+		try (
+				Connection conn = new ConnectionFactory().getConnection();
+				PreparedStatement pstmt = conn.prepareStatement(sql.toString());
+					){
+				pstmt.setString(1, phoneNo);
+				pstmt.setString(2, IDFactory.getID());
+				
+				pstmt.executeUpdate();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 	}
 
 }

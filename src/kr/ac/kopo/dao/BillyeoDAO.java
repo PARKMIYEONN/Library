@@ -18,15 +18,15 @@ public class BillyeoDAO {
 		
 	}
 	
-	public List<BillyeoVO> billinsaram(){
+	public List<BillyeoVO> billinsaram(){				//책을 빌린 사람 정보와 빌린 책 정보 리스트 리턴
 		
 		List<BillyeoVO> billyeoList = new ArrayList<>();
 		
 		StringBuilder sql = new StringBuilder();
-		sql.append("select no, b.id, password, name, phone_no, birthday, a.b_no, b_title, b_writer, b_publisher, to_char(rnt_date, 'yyyy-mm-dd')as rnt_date, to_char((rnt_date + 7), 'yyyy-mm-dd')as rt_date ");
+		sql.append("select no, b.id, password, name, phone_no, to_char(birthday,'yyyy-mm-dd')as birthday, a.b_no, b_title, b_writer, b_publisher, to_char(rnt_date, 'yyyy-mm-dd')as rnt_date, to_char((rnt_date + 7), 'yyyy-mm-dd')as rt_date ");
 		sql.append(" from rental a join members b on b.id = a.id join books c on c.b_no = a.b_no ");
 		sql.append(" where b.id = ? ");
-		sql.append(" group by no, b.id, password, name, phone_no, birthday, a.b_no, b_title, b_writer, b_publisher, rnt_date");
+		sql.append(" group by no, b.id, password, name, phone_no, to_char(birthday,'yyyy-mm-dd'), a.b_no, b_title, b_writer, b_publisher, rnt_date");
 		
 		try (
 			Connection conn = new ConnectionFactory().getConnection();
@@ -57,14 +57,14 @@ public class BillyeoDAO {
 		return billyeoList;
 	}
 	
-	public List<BillyeoVO> billinsaramAll(){
+	public List<BillyeoVO> billinsaramAll(){			//대출중인 모든 사람에 대한 정보와 빌린 책 정보 리스트 리턴
 		
 		List<BillyeoVO> billyeoList = new ArrayList<>();
 		
 		StringBuilder sql = new StringBuilder();
-		sql.append("select no, b.id, name, phone_no, birthday, a.b_no, b_title, b_writer, b_publisher, rnt_date, (rnt_date + 7)as rt_date ");
+		sql.append("select no, b.id, name, phone_no, to_char(birthday,'yyyy-mm-dd')as birthday, a.b_no, b_title, b_writer, b_publisher, to_char(rnt_date,'yyyy-mm-dd')as rnt_date, to_char((rnt_date + 7),'yyyy-mm-dd')as rt_date ");
 		sql.append(" from rental a join members b on b.id = a.id join books c on c.b_no = a.b_no ");
-		sql.append(" group by no, b.id, name, phone_no, birthday, a.b_no, b_title, b_writer, b_publisher, rnt_date");
+		sql.append(" group by no, b.id, name, phone_no, to_char(birthday,'yyyy-mm-dd'), a.b_no, b_title, b_writer, b_publisher, rnt_date");
 		
 		try (
 				Connection conn = new ConnectionFactory().getConnection();
@@ -93,7 +93,7 @@ public class BillyeoDAO {
 		return billyeoList;
 	}
 	
-	public List<BillyeoVO> billinBook(int allofBook){
+	public List<BillyeoVO> billinBook(int allofBook){			//받은 책 고유번호에 대한 책의 정보 리스트 리턴
 		List<BillyeoVO> billList = new ArrayList<>();
 		
 		StringBuilder sql = new StringBuilder();
@@ -124,7 +124,7 @@ public class BillyeoDAO {
 		return billList;
 	}
 	
-	public List<BillyeoVO> billinThing(){
+	public List<BillyeoVO> billinThing(){						//현재 로그인한 사람이 빌린 책에 대한 정보 리스트 리턴
 		List<BillyeoVO> billList = new ArrayList<>();
 		
 		StringBuilder sql = new StringBuilder();

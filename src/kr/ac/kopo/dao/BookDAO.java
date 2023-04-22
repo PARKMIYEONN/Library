@@ -17,7 +17,7 @@ public class BookDAO {
 		
 	}
 	
-	public void addBook(BookVO book) {
+	public void addBook(BookVO book) {					//책 정보 입력
 		
 		StringBuilder sql = new StringBuilder();
 		sql.append("insert into books(b_no, b_title, b_writer, b_publisher) values(seq_books_no.nextval, ?, ?, ?) ");
@@ -38,16 +38,16 @@ public class BookDAO {
 		}
 	}
 	
-	public void delBook(BookVO book) {
+	public void delBook(BookVO book) {							//책 정보 삭제
 		StringBuilder sql = new StringBuilder();
-		sql.append("delete from books where b_no = ? and b_title = ? " );
+		sql.append("delete from books where b_no = ? " );
 		
 		try (
 			 Connection conn = new ConnectionFactory().getConnection();
 			 PreparedStatement pstmt = conn.prepareStatement(sql.toString());
 				){
 			pstmt.setInt(1, book.getBookNO());
-			pstmt.setString(2, book.getBookTitle());
+			
 			pstmt.executeUpdate();
 			
 		} catch (Exception e) {
@@ -55,7 +55,7 @@ public class BookDAO {
 		}
 	}
 	
-	public List<BookVO> selectAllBook(){
+	public List<BookVO> selectAllBook(){					//모든 책에 대한 정보 리스트 리턴
 		List<BookVO> bookList = new ArrayList<>();
 		
 		StringBuilder sql = new StringBuilder();
@@ -83,7 +83,7 @@ public class BookDAO {
 		return bookList;
 	}
 	
-	public BookVO selectBy(String theBookTitle) {
+	public BookVO selectBy(String theBookTitle) {				//책 제목을 받아서 그 책의 모든 정보 리턴
 		
 		BookVO book = null;
 		
@@ -114,7 +114,7 @@ public class BookDAO {
 		
 	}
 	
-	public List<BookVO> selectByAll(String allofbook) {
+	public List<BookVO> selectByAll(String allofbook) {		//책 정보의 일부분을 String으로 받아 그 정보를 포함한 책 정보 리스트 리턴 
 		List<BookVO> book = new ArrayList<>();
 		int bookh = 0;
 		StringBuilder sql = new StringBuilder();
@@ -149,7 +149,7 @@ public class BookDAO {
 		return book;
 	}
 	
-	public int selectByAllChck(String allofbook) {
+	public int selectByAllChck(String allofbook) {		//책에 관한 정보를 String으로 얻고 그 책의 정보를 가진 instr컬름의 값을 리턴
 		int book = 0;
 		StringBuilder sql = new StringBuilder();
 		sql.append("select instr((b_no || b_title || b_writer || b_publisher), ?) as book");

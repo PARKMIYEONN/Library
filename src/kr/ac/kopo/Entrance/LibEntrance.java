@@ -5,9 +5,9 @@ import java.util.Scanner;
 public class LibEntrance extends BaseUI{
 	
 	private int logInMenu() {
-		System.out.println("************* 도서 관리 프로그램 *************");
+		System.out.println("************* 도서 관리 시스템 *************");
 		System.out.println(" 1. 로그인   2. 회원가입  3. 종료");
-		System.out.println("=====================================================================================================");
+		System.out.println("====================================================================================================================");
 
 		Scanner sc = new Scanner(System.in);
 		System.out.print("원하는 항목을 선택하세요 : ");

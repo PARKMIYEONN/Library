@@ -18,7 +18,7 @@ public class RentalDAO {
 		
 	}
 	
-	public void rentBook(RentalVO rent) {
+	public void rentBook(RentalVO rent) {		//빌려간 사람의 아이디와 빌린 책의 고유번호 입력
 		
 		StringBuilder sql = new StringBuilder();
 		sql.append("insert into rental (rnt_no, id, b_no) values(seq_rental_no.nextval, ?, ?) " );
@@ -39,7 +39,7 @@ public class RentalDAO {
 		}
 	}
 	
-	public List<Integer> selectbyBookNo(int bookNo){
+	public List<Integer> selectbyBookNo(int bookNo){		//받아온 책 고유번호를 바탕으로 리스트 생성 없는 책이면 리스트 길이는 0
 		
 		List<Integer> bNolist = new ArrayList<>();		
 		StringBuilder sql = new StringBuilder();
@@ -64,7 +64,7 @@ public class RentalDAO {
 		return bNolist;
 	}
 	
-	public void returnBook(int bookNo) {
+	public void returnBook(int bookNo) {		// 책 삭제
 		StringBuilder sql = new StringBuilder();
 		sql.append("delete from rental where b_no = ? ");
 		
@@ -82,7 +82,7 @@ public class RentalDAO {
 		}
 	}
 	
-	public List<Integer> rentalCheck(){
+	public List<Integer> rentalCheck(){		//현재 로그인한 사람이 대출중이라면 그 책의 고유번호 리턴
 		
 		List<Integer> rb = new ArrayList<>();
 		StringBuilder sql = new StringBuilder();

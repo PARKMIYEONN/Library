@@ -13,7 +13,7 @@ public class AddBooks extends BaseUI{
 	}
 	
 	@Override
-	public void enter() throws Exception{
+	public void enter() throws Exception{					//도서 등록
 		String bookTitle = scanStr("책 제목을 입력하세요 : ");
 		String bookWriter = scanStr("글쓴이를 입력하세요 : ");
 		String bookPublisher = scanStr("출판사를 입력하세요 : ");

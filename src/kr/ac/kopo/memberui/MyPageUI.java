@@ -7,7 +7,6 @@ import kr.ac.kopo.Entrance.BaseUI;
 import kr.ac.kopo.Entrance.ExitUI;
 import kr.ac.kopo.Entrance.ILibEntrance;
 import kr.ac.kopo.Entrance.LibEntrance;
-import kr.ac.kopo.rental.SearchAllRntBooks;
 
 public class MyPageUI extends BaseUI{
 	
@@ -19,7 +18,7 @@ public class MyPageUI extends BaseUI{
 		System.out.println("4. 회원탈퇴");		
 		System.out.println("5. 로그아웃");
 		System.out.println("6. 종료");
-		System.out.println("=====================================================================================================");
+		System.out.println("====================================================================================================================");
 
 		System.out.print("원하는 항목을 선택하세요 : ");
 		Scanner sc = new Scanner(System.in);
@@ -45,7 +44,7 @@ public class MyPageUI extends BaseUI{
 				
 				break;
 			case 3:
-				door = new SearchAllRntBooks();
+				door = new MypageUI02();
 				break;
 			case 4:
 				door = new TalUI();

@@ -23,7 +23,7 @@ public class AdminPage extends BaseUI{
 		System.out.println("5. 대출 현황 출력");
 		System.out.println("6. 로그아웃");
 		
-		System.out.println("=====================================================================================================");
+		System.out.println("====================================================================================================================");
 
 		Scanner sc = new Scanner(System.in);
 		System.out.print("원하시는 항목을 입력하세요 : ");
