@@ -59,7 +59,7 @@ public class BookDAO {
 		List<BookVO> bookList = new ArrayList<>();
 		
 		StringBuilder sql = new StringBuilder();
-		sql.append("select * from books");
+		sql.append("select * from books order by b_no");
 		try (
 			 Connection conn = new ConnectionFactory().getConnection();
 			 PreparedStatement pstmt = conn.prepareStatement(sql.toString());
@@ -88,7 +88,7 @@ public class BookDAO {
 		BookVO book = null;
 		
 		StringBuilder sql = new StringBuilder();
-		sql.append("select * from books where b_title = ? order by b_no desc");
+		sql.append("select * from books where b_title = ? order by b_no");
 		
 		try (
 			Connection conn = new ConnectionFactory().getConnection();
@@ -122,7 +122,7 @@ public class BookDAO {
 		sql.append(" , b_no, b_title, b_writer, b_publisher");
 		sql.append(" from books");
 		sql.append(" where instr((b_no || b_title || b_writer || b_publisher), ?) != 0");
-			
+		sql.append(" order by b_no");	
 		try (
 			Connection conn = new ConnectionFactory().getConnection();
 			PreparedStatement pstmt = conn.prepareStatement(sql.toString());
@@ -154,7 +154,6 @@ public class BookDAO {
 		StringBuilder sql = new StringBuilder();
 		sql.append("select instr((b_no || b_title || b_writer || b_publisher), ?) as book");
 		sql.append(" from rental");
-		
 		
 		try (
 			Connection conn = new ConnectionFactory().getConnection();

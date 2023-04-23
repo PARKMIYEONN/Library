@@ -20,7 +20,7 @@ public class AllRentalSaram extends BaseUI{
 		
 		System.out.println("====================================================================================================================");
 
-		System.out.println("회원번호\t아이디\t이름\t전화번호\t\t생일\t\t책번호\t책제목\t글쓴이\t출판사\t대여일\t\t반납일");
+		System.out.println("회원번호\t아이디\t이름\t전화번호\t\t생일\t\t책번호\t책제목\t\t글쓴이\t출판사\t대여일\t\t반납일");
 		System.out.println("====================================================================================================================");
 
 
@@ -36,7 +36,7 @@ public class AllRentalSaram extends BaseUI{
 		} else {
 			for(BillyeoVO bList : bilList) {
 				System.out.println(bList.getNo() + "\t" + bList.getId() + "\t" + bList.getName() + "\t" + bList.getPhoneNo() + "\t" + bList.getBirthday()
-				 + "\t" + bList.getBookNo() + "\t" + bList.getBookTitle() + "\t" + bList.getBookWriter() + "\t" + bList.getBookPublisher() + "\t" + bList.getRntDate() + "\t" + bList.getRtDate());
+				 + "\t" + bList.getBookNo() + "\t" + bList.getBookTitle() + "      "+  "\t" + bList.getBookWriter() + "\t" + bList.getBookPublisher() + "\t" + bList.getRntDate() + "\t" + bList.getRtDate());
 			}
 		}
 	}

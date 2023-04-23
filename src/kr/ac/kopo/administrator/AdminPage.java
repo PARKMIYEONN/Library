@@ -15,7 +15,9 @@ import kr.ac.kopo.rental.AllRentalSaram;
 public class AdminPage extends BaseUI{
 	
 	private int adminMenu() {
-		System.out.println("************* 관리자 모드 *************");
+		System.out.println("*******************************************************************************************************************");
+		System.out.println("\t\t\t\t\t\t관리자 모드");
+		System.out.println("*******************************************************************************************************************");
 		System.out.println("1. 도서등록");
 		System.out.println("2. 도서삭제");
 		System.out.println("3. 도서 목록 출력");
@@ -28,6 +30,7 @@ public class AdminPage extends BaseUI{
 		Scanner sc = new Scanner(System.in);
 		System.out.print("원하시는 항목을 입력하세요 : ");
 		int type = sc.nextInt();
+		sc.nextLine();
 		return type;
 		
 	}

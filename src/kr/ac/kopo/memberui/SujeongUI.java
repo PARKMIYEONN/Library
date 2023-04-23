@@ -8,7 +8,10 @@ import kr.ac.kopo.Entrance.ILibEntrance;
 public class SujeongUI extends BaseUI{
 	
 	private int suj() {
-		System.out.println("************* 정보수정 *************");
+		System.out.println("********************************************************************************************************************");
+		System.out.println("\t\t\t\t\t\t정보 수정");
+		System.out.println("********************************************************************************************************************");
+		
 		
 		System.out.println("1. 비밀번호 수정");
 		System.out.println("2. 이름 수정");

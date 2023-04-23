@@ -30,9 +30,9 @@ public class SearchOne extends BaseUI{
 
 		if (book.size() != 0) {
 			
-			System.out.println("고유번호\t책제목\t글쓴이\t출판사\t대출여부");
+			System.out.println("고유번호\t책제목\t\t글쓴이\t출판사\t대출여부");
 			for(BookVO booklist : book) {
-				System.out.print(booklist.getBookNO() + "\t" + booklist.getBookTitle() + "\t" + booklist.getBookWriter() + "\t" + booklist.getBookPublisher());
+				System.out.print(booklist.getBookNO() + "\t" + booklist.getBookTitle() + "      "+ "\t" + booklist.getBookWriter() + "\t" + booklist.getBookPublisher());
 				
 					List<BillyeoVO> billin = bilService.billi(booklist.getBookNO());
 					

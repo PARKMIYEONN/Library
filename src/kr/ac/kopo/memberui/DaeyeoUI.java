@@ -28,6 +28,7 @@ public class DaeyeoUI extends BaseUI{
 	@Override
 	public void enter() throws Exception {
 		
+		
 		int bookNo = scanInt("대여할 책의 고유번호를 입력하세요 : ");
 		
 		List<Integer> bNolist = rentDao.rentBNO(bookNo);

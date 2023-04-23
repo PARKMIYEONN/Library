@@ -28,7 +28,7 @@ public class ReturnUI extends BaseUI{
 		System.out.println("대여중인 책 목록");
 		System.out.println("====================================================================================================================");
 
-		System.out.println("고유번호\t제목\t글쓴이\t출판사");
+		System.out.println("고유번호\t제목\t\t글쓴이\t출판사");
 		System.out.println("====================================================================================================================");
 
 		for(BillyeoVO billinlist : billin) {
@@ -36,7 +36,7 @@ public class ReturnUI extends BaseUI{
 			if(billin.size() == 0) {
 				break;
 			} else {
-				System.out.println(billinlist.getBookNo() + "\t" + billinlist.getBookTitle() + "\t" + billinlist.getBookWriter() + "\t" + billinlist.getBookPublisher());
+				System.out.println(billinlist.getBookNo() + "\t" + billinlist.getBookTitle() + "      "+ "\t" + billinlist.getBookWriter() + "\t" + billinlist.getBookPublisher());
 			}
 		}
 		if(billin.size() == 0) {

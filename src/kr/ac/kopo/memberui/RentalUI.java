@@ -10,7 +10,10 @@ import kr.ac.kopo.rental.SearchOne;
 public class RentalUI extends BaseUI{
 
 	private int rentalMenu() {
-		System.out.println("********** 도서 대출 메뉴 **********");
+		System.out.println("********************************************************************************************************************");
+		System.out.println("\t\t\t\t\t\t도서 대출 메뉴");
+		System.out.println("********************************************************************************************************************");
+		
 		
 		System.out.println("1. 전체 도서 목록");
 		System.out.println("2. 도서 검색");

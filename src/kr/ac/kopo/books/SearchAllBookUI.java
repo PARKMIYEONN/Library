@@ -23,7 +23,7 @@ public class SearchAllBookUI extends BaseUI{
 		
 		System.out.println("====================================================================================================================");
 
-		System.out.println("고유번호\t책 제목\t글쓴이\t출판사\t대출여부");
+		System.out.println("고유번호\t책 제목\t\t글쓴이\t출판사\t대출여부");
 		System.out.println("====================================================================================================================");
 		
 		if(bookList == null || bookList.size() == 0) {
@@ -34,7 +34,7 @@ public class SearchAllBookUI extends BaseUI{
 
 		} else {
 			for(BookVO book : bookList) {
-				System.out.print(book.getBookNO() + "\t" + book.getBookTitle() + "\t" + book.getBookWriter() + "\t" + book.getBookPublisher());
+				System.out.print(book.getBookNO() + "\t" + book.getBookTitle() + "      "+ "\t" + book.getBookWriter() + "\t" + book.getBookPublisher());
 				List<BillyeoVO> billin = bilService.billi(book.getBookNO());
 				
 				if(billin.size() == 0) {				//Rental테이블에 없으면 도서 보유중

@@ -38,11 +38,11 @@ public class SearchAllRntBooks extends BaseUI{
 
 		} else {
 			System.out.println("********************************************************************************************************************");
-			System.out.println("책번호\t책제목\t글쓴이\t출판사\t대여일\t\t반납일");
+			System.out.println("책번호\t책제목\t\t글쓴이\t출판사\t대여일\t\t반납일");
 			System.out.println("====================================================================================================================");
 
 			for(BillyeoVO bList : billyeoList) {
-				System.out.println(bList.getBookNo() + "\t" + bList.getBookTitle() + "\t" + bList.getBookWriter() + "\t" + bList.getBookPublisher() + "\t" + bList.getRntDate() + "\t" + bList.getRtDate());
+				System.out.println(bList.getBookNo() + "\t" + bList.getBookTitle() + "      "+ "\t" + bList.getBookWriter() + "\t" + bList.getBookPublisher() + "\t" + bList.getRntDate() + "\t" + bList.getRtDate());
 			}
 			System.out.println("====================================================================================================================");
 			

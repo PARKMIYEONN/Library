@@ -11,7 +11,10 @@ import kr.ac.kopo.Entrance.LibEntrance;
 public class MyPageUI extends BaseUI{
 	
 	private int menu() {
-		System.out.println("************* 회원 메뉴 *************");
+		System.out.println("*******************************************************************************************************************");
+		System.out.println("\t\t\t\t\t\t회원 메뉴");
+		System.out.println("*******************************************************************************************************************");
+		
 		System.out.println("1. 도서대출메뉴");
 		System.out.println("2. 도서반납");
 		System.out.println("3. 마이페이지");

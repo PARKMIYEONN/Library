@@ -12,7 +12,7 @@ import kr.ac.kopo.vo.BillyeoVO;
 
 public class BillyeoDAO {
 	
-	private List<BillyeoDAO> billyeoList;
+	private List<BillyeoVO> billyeoList;
 	
 	public BillyeoDAO() {
 		
@@ -27,6 +27,7 @@ public class BillyeoDAO {
 		sql.append(" from rental a join members b on b.id = a.id join books c on c.b_no = a.b_no ");
 		sql.append(" where b.id = ? ");
 		sql.append(" group by no, b.id, password, name, phone_no, to_char(birthday,'yyyy-mm-dd'), a.b_no, b_title, b_writer, b_publisher, rnt_date");
+		sql.append(" order by no");
 		
 		try (
 			Connection conn = new ConnectionFactory().getConnection();
@@ -65,6 +66,7 @@ public class BillyeoDAO {
 		sql.append("select no, b.id, name, phone_no, to_char(birthday,'yyyy-mm-dd')as birthday, a.b_no, b_title, b_writer, b_publisher, to_char(rnt_date,'yyyy-mm-dd')as rnt_date, to_char((rnt_date + 7),'yyyy-mm-dd')as rt_date ");
 		sql.append(" from rental a join members b on b.id = a.id join books c on c.b_no = a.b_no ");
 		sql.append(" group by no, b.id, name, phone_no, to_char(birthday,'yyyy-mm-dd'), a.b_no, b_title, b_writer, b_publisher, rnt_date");
+		sql.append(" order by no");
 		
 		try (
 				Connection conn = new ConnectionFactory().getConnection();
@@ -94,12 +96,13 @@ public class BillyeoDAO {
 	}
 	
 	public List<BillyeoVO> billinBook(int allofBook){			//받은 책 고유번호에 대한 책의 정보 리스트 리턴
-		List<BillyeoVO> billList = new ArrayList<>();
+		List<BillyeoVO> billyeoList = new ArrayList<>();
 		
 		StringBuilder sql = new StringBuilder();
 		sql.append("select a.b_no, b_title, b_writer, b_Publisher");
 		sql.append(" from rental a join members b on b.id = a.id join books c on c.b_no = a.b_no ");
 		sql.append(" where a.b_no = ?");
+		sql.append(" order by a.b_no");
 		
 		try (
 				Connection conn = new ConnectionFactory().getConnection();
@@ -115,22 +118,23 @@ public class BillyeoDAO {
 				String bookPublisher = rs.getString("b_publisher");
 				
 				BillyeoVO billyeo = new BillyeoVO(bookNO, bookTitle, bookWriter, bookPublisher);
-				billList.add(billyeo);
+				billyeoList.add(billyeo);
 			}
 			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return billList;
+		return billyeoList;
 	}
 	
 	public List<BillyeoVO> billinThing(){						//현재 로그인한 사람이 빌린 책에 대한 정보 리스트 리턴
-		List<BillyeoVO> billList = new ArrayList<>();
+		List<BillyeoVO> billyeoList = new ArrayList<>();
 		
 		StringBuilder sql = new StringBuilder();
 		sql.append("select a.b_no, b_title, b_writer, b_publisher");
 		sql.append(" from rental a join members b on b.id = a.id join books c on c.b_no = a.b_no ");
 		sql.append(" where a.id = ?");
+		sql.append(" order by a.b_no");
 		
 		try (
 			Connection conn = new ConnectionFactory().getConnection();
@@ -146,12 +150,12 @@ public class BillyeoDAO {
 				String bookPublisher = rs.getString("b_publisher");
 				
 				BillyeoVO billyeo = new BillyeoVO(bookNO, bookTitle, bookWriter, bookPublisher);
-				billList.add(billyeo);
+				billyeoList.add(billyeo);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return billList;
+		return billyeoList;
 	}
 	
 
